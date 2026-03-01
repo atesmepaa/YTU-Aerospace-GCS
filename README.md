@@ -1,12 +1,12 @@
 # 🛸 YTÜ Maçka GCS
 
-**Yıldız Teknik Üniversitesi Maçka Aerospace** takımı tarafından geliştirilen, Python/CustomTkinter tabanlı yer kontrol istasyonu (Ground Control Station) yazılımı.
+**Yıldız Teknik Üniversitesi Maçka Aerospace** takımı tarafından geliştirilen, Python tabanlı yer kontrol istasyonu (Ground Control Station) yazılımı.
 
 ---
 
 ## 📸 Ekran Görüntüsü
 
-> _Uygulama açıldığında sol panelde telemetri verileri ve canlı kamera akışı, sağ panelde komut butonları görünür._
+> _Uygulama açıldığında sol panelde telemetri verileri, 300m²'den 1km²'ye kadar ölçeklenebilen bir map ve canlı kamera akışı, sağ panelde komut butonları görünür._
 
 ---
 
@@ -14,7 +14,7 @@
 
 | Özellik | Açıklama |
 |---|---|
-| 📡 SiK Telemetri | JSON tabanlı çift yönlü haberleşme, otomatik yeniden bağlanma |
+| 📡 SiK Telemetri İletişim | JSON tabanlı çift yönlü haberleşme, otomatik yeniden bağlanma |
 | 🗺️ Canlı Harita | GPS iz takibi, waypoint ekleme/silme, 300–1000m akıllı zoom |
 | 📷 Canlı Kamera | Raspberry Pi MJPEG stream (HTTP) |
 | 🧭 IMU Göstergesi | Pitch / Roll görsel widget'ı (gerçek telemetri veya mouse simülasyonu) |
@@ -22,7 +22,7 @@
 | 🔍 Task 2 — Tarama | 2 WP'den zigzag alan tarama rotası, ayarlanabilir şerit aralığı |
 | 🟢 Payload HUD | Yük sensörü durumu (yeşil/kırmızı gösterge) |
 | 🔗 Bağlantı İzleme | Telemetri paket akışına göre otomatik BAĞLI / ZAYIF / KOPUK tespiti |
-| 🚨 Acil Durdurma | Tek tuş motor kill komutu |
+| 🚨 Acil Durdurma | Tek tuş motor kill komutu (DISARM) |
 
 ---
 
@@ -59,20 +59,11 @@ gcs_app/
 - Fiziksel veya sanal SiK radyo (COM port)
 - Raspberry Pi kamera stream (opsiyonel)
 
-### Bağımlılıkları Yükle
+### Kütüphaneler
 
 ```bash
 pip install customtkinter pillow pyserial
 ```
-
-### Çalıştır
-
-```bash
-cd gcs_app
-python main.py
-```
-
----
 
 ## ⚙️ Yapılandırma
 
@@ -93,7 +84,7 @@ DEBUG_JSON_FAIL   = True   # JSON ayrıştırma hatalarını göster
 ## 🗺️ Harita Kullanımı
 
 ### Waypoint Ekleme
-Drone GPS konumuna sahipken **`+ WP Ekle`** butonuna basın. Her basışta mevcut konum listeye eklenir.
+Drone GPS konumuna sahipken **`+ WP Ekle`** butonuna basın. Her basışta drone'un anlık olduğu konum ekstra olarak waypoint listesine eklenir.
 
 ### Task 1 — Figure-8
 1. Harita modunu **`TASK1`** olarak ayarlayın (sağ üst toggle)
